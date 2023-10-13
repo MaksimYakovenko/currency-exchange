@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Exchange Rates</title>
+</head>
+<body>
+<h1>Currency Exchange Rates (National Bank)</h1>
+<p>Current Date: {{ currentDate }}</p>
+
+<h2>Currency Exchange Rates</h2>
+<table mat-table [dataSource]="currencies">
+  <ng-container matColumnDef="kurs_type_description">
+    <th mat-header-cell *matHeaderCellDef> kurs_type_description </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.kurs_type_description }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_type">
+    <th mat-header-cell *matHeaderCellDef> kurs_type </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.kurs_type }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_date">
+    <th mat-header-cell *matHeaderCellDef> kurs_date </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.kurs_date }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> name </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="short_name">
+    <th mat-header-cell *matHeaderCellDef> short_name </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.short_name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef> code </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.code }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs">
+    <th mat-header-cell *matHeaderCellDef> kurs </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.kurs }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="forc_kurs">
+    <th mat-header-cell *matHeaderCellDef> forc_kurs </th>
+    <td mat-cell *matCellDef="let currency"> {{ currency.forc_kurs }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['kurs_type_description', 'kurs_type', 'kurs_date', 'name', 'short_name', 'code', 'kurs', 'forc_kurs']"></tr>
+  <tr mat-row *matRowDef="let currency; columns: ['kurs_type_description', 'kurs_type', 'kurs_date', 'name', 'short_name', 'code', 'kurs', 'forc_kurs']"></tr>
+</table>
+
+<h2>Currency Exchange Rates (buy and sell rates)</h2>
+<table mat-table [dataSource]="secondTableCurrencies" class="mat-elevation-z8">
+  <ng-container matColumnDef="kurs_type_description">
+    <th mat-header-cell *matHeaderCellDef> kurs_type_description </th>
+    <td mat-cell *matCellDef="let elem"> {{ elem.kurs_type_description }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_type">
+    <th mat-header-cell *matHeaderCellDef> kurs_type </th>
+    <td mat-cell *matCellDef="let elem"> {{ elem.kurs_type }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_date">
+    <th mat-header-cell *matHeaderCellDef> kurs_date </th>
+    <td mat-cell *matCellDef="let elem"> {{ elem.kurs_date }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>name</th>
+    <td mat-cell *matCellDef="let elem">{{elem.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="short_name">
+    <th mat-header-cell *matHeaderCellDef>short_name</th>
+    <td mat-cell *matCellDef="let elem">{{elem.short_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef>code</th>
+    <td mat-cell *matCellDef="let elem">{{elem.code}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_buy">
+    <th mat-header-cell *matHeaderCellDef>kurs_buy</th>
+    <td mat-cell *matCellDef="let elem">{{elem.kurs_buy}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_sale">
+    <th mat-header-cell *matHeaderCellDef>kurs_sale</th>
+    <td mat-cell *matCellDef="let elem">{{elem.kurs_sale}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="forc">
+    <th mat-header-cell *matHeaderCellDef>forc</th>
+    <td mat-cell *matCellDef="let elem">{{elem.forc}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['kurs_type_description', 'kurs_type', 'kurs_date', 'name', 'short_name', 'code', 'kurs_buy', 'kurs_sale', 'forc']"></tr>
+  <tr mat-row *matRowDef="let elem; columns: ['kurs_type_description', 'kurs_type', 'kurs_date', 'name', 'short_name', 'code', 'kurs_buy', 'kurs_sale', 'forc']"></tr>
+</table>
+<h3>Metal Rate (buy and sell rates)</h3>
+<table mat-table [dataSource]="thirdTableCurrencies" class="mat-elevation-z8">
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef>code</th>
+    <td mat-cell *matCellDef="let element">{{element.code}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_date">
+    <th mat-header-cell *matHeaderCellDef>kurs_date</th>
+    <td mat-cell *matCellDef="let element">{{element.kurs_date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_sale_uah">
+    <th mat-header-cell *matHeaderCellDef>kurs_sale_uah</th>
+    <td mat-cell *matCellDef="let element">{{element.kurs_sale_uah}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="kurs_buy_uah">
+    <th mat-header-cell *matHeaderCellDef>kurs_buy_uah</th>
+    <td mat-cell *matCellDef="let element">{{element.kurs_buy_uah}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="start_time">
+    <th mat-header-cell *matHeaderCellDef>start_time</th>
+    <td mat-cell *matCellDef="let element">{{element.start_time}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['code', 'name', 'kurs_date', 'kurs_sale_uah', 'kurs_buy_uah', 'start_time']"></tr>
+  <tr mat-row *matRowDef="let element; columns: ['code', 'name', 'kurs_date', 'kurs_sale_uah', 'kurs_buy_uah', 'start_time']"></tr>
+</table>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Currency Exchange Rates</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Currency Exchange Rates (National Bank)</h2>-->
+<!--<p>Current Date: {{ currentDate }}</p>-->
+
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>kurs_type_description</th>-->
+<!--    <th>kurs_type</th>-->
+<!--    <th>kurs_date</th>-->
+<!--    <th>name</th>-->
+<!--    <th>short_name</th>-->
+<!--    <th>code</th>-->
+<!--    <th>kurs</th>-->
+<!--    <th>forc_kurs</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let currency of currencies">-->
+<!--    <td>{{ currency.kurs_type_description }}</td>-->
+<!--    <td>{{ currency.kurs_type }}</td>-->
+<!--    <td>{{ currency.kurs_date }}</td>-->
+<!--    <td>{{ currency.name }}</td>-->
+<!--    <td>{{ currency.short_name }}</td>-->
+<!--    <td>{{ currency.code }}</td>-->
+<!--    <td>{{ currency.kurs }}</td>-->
+<!--    <td>{{ currency.forc_kurs }}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+<!--<h2>Currency Exchange Rates (buy and sell rates)</h2>-->
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>kurs_type_description</th>-->
+<!--    <th>kurs_type</th>-->
+<!--    <th>kurs_date</th>-->
+<!--    <th>name</th>-->
+<!--    <th>short_name</th>-->
+<!--    <th>code</th>-->
+<!--    <th>kurs_buy</th>-->
+<!--    <th>kurs_sale</th>-->
+<!--    <th>forc</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let elem of secondTableCurrencies">-->
+<!--    <td>{{ elem.kurs_type_description }}</td>-->
+<!--    <td>{{ elem.kurs_type }}</td>-->
+<!--    <td>{{ elem.kurs_date }}</td>-->
+<!--    <td>{{ elem.name }}</td>-->
+<!--    <td>{{ elem.short_name }}</td>-->
+<!--    <td>{{ elem.code }}</td>-->
+<!--    <td>{{ elem.kurs_buy }}</td>-->
+<!--    <td>{{ elem.kurs_sale }}</td>-->
+<!--    <td>{{ elem.forc }}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+<!--<h2>Metal Rate(buy and sell rates)</h2>-->
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>code</th>-->
+<!--    <th>name</th>-->
+<!--    <th>kurs_date</th>-->
+<!--    <th>kurs_sale_uah</th>-->
+<!--    <th>kurs_buy_uah</th>-->
+<!--    <th>start_time</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let element of thirdTableCurrencies">-->
+<!--    <td>{{ element.code }}</td>-->
+<!--    <td>{{ element.name }}</td>-->
+<!--    <td>{{ element.kurs_date }}</td>-->
+<!--    <td>{{ element.kurs_sale_uah }}</td>-->
+<!--    <td>{{ element.kurs_buy_uah }}</td>-->
+<!--    <td>{{ element.start_time }}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
